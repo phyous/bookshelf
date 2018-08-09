@@ -1,0 +1,7 @@
+Gemfile.lock
+/node_modules/
+/dist
+/.idea
+/data/api_keys.yaml
+/data/book_data.yaml
+/data/oauth_keys.yaml

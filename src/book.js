@@ -6,15 +6,15 @@ export class Book extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      url: "http://covers.openlibrary.org/b/isbn/9781476733500-L.jpg",
-      name: "Some Book"
+      cover_image: this.props.cover_image,
+      title: this.props.title
     }
   }
 
   render() {
     return (
       <div className="book-cover">
-        <img src={this.state.url} alt={this.state.name}/>
+        <img src={this.state.cover_image} alt={this.state.title}/>
       </div>
     )
   }

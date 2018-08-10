@@ -17,9 +17,8 @@ export class BookshelfFetcher extends Component {
         return results.json()
       })
       .then(data => {
-        //{return (<Book url={book.url} name={book.name}>)})
         let books = data["books"].map((book) => {
-          return (<Book key={book.isbn} url={book.url} name={book.name}/>)
+          return (<Book key={book.isbn} cover_image={book.cover_image} title={book.title}/>)
         })
 
         this.setState({books: books})

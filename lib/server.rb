@@ -1,18 +1,30 @@
 require 'sinatra'
+require 'yaml'
 
-# Hook it up to become a basic react app
+BOOK_DATA_FILE_PATH = './data/book_data.yaml'
+book_data = YAML::load_file(BOOK_DATA_FILE_PATH)
 
 get '/books' do
   response.headers['Access-Control-Allow-Origin'] = '*'
-  {
+
+  random_book = book_data.sample["book"][0]
+  isbn13 = random_book["isbn13"][0]
+  title = random_book["title"][0]
+  cover_image = "http://covers.openlibrary.org/b/isbn/#{isbn13}-L.jpg"
+
+  json = {
       books: [
           {
-              "isbn" => "9781476733500",
-              "title" => "foo",
-              "cover_image" => "http://covers.openlibrary.org/b/isbn/9781476733500-L.jpg"
+              "isbn" => isbn13,
+              "title" => title,
+              "cover_image" => cover_image
           }
       ]
   }.to_json
+
+  puts json
+
+  return json
 end
 
 get '/' do

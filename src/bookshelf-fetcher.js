@@ -1,5 +1,8 @@
 import React, {Component} from "react";
 import {Book} from "./book";
+import {BookMetadata} from "./book-metadata";
+
+import './style/style.css'
 
 export class BookshelfFetcher extends Component {
 
@@ -18,7 +21,7 @@ export class BookshelfFetcher extends Component {
       })
       .then(data => {
         let books = data["books"].map((book) => {
-          return (<Book key={book.isbn} cover_image={book.cover_image} title={book.title}/>)
+          return this.renderBook(book)
         })
 
         this.setState({books: books})
@@ -26,6 +29,19 @@ export class BookshelfFetcher extends Component {
       .catch(function (error) {
         console.error('Request failed', error)
       });
+  }
+
+  renderBook(book) {
+    return (
+      <div className="row">
+        <div className="six columns">
+          <Book key={book.id} cover_image={book.images.url_large} title={book.title}/>
+        </div>
+        <div className="three columns">
+          <BookMetadata key={book.id+1} author={book.author} title={book.title} averageRating={book.average_rating}/>
+        </div>
+      </div>
+    )
   }
 
   render() {
